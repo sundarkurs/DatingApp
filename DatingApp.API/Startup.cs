@@ -29,6 +29,7 @@ namespace DatingApp.API
         {
             services.AddDbContext<DataContext>(item => item.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"))); 
             services.AddControllers();
+            services.AddScoped<IAuthRepository, AuthRepository>();
 
             services.AddCors();
         }
