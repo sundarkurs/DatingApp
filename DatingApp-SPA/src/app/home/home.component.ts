@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   registerToggle(){
-    this.registerMode = !this.registerMode;
+    this.registerMode = true;
   }
 
   getValues(){
@@ -28,6 +28,11 @@ export class HomeComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  cancelRegisterMode(registerMode: boolean){
+    console.log('Event received from Child.');
+    this.registerMode = registerMode;
   }
 
 }
