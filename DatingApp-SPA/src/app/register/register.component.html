@@ -3,15 +3,15 @@
   <hr>
 
   <div class="form-group">
-    <input type="text" class="form-control" required name="username" placeholder="Username"
-    [(ngModel)]="model.username">
+    <label for="title">Title?</label>
+    <select id="title" class="form-control">
+      <option *ngFor="let title of titlesFromHome" [value]="title">{{title}}</option>
+    </select>
   </div>
 
   <div class="form-group">
-    <label for="favouriteValue">What is your favourite value?</label>
-    <select id="favouriteValue" class="form-control">
-      <option *ngFor="let value of valuesFromHome" [value]="value">{{value.name}}</option>
-    </select>
+    <input type="text" class="form-control" required name="username" placeholder="Username"
+    [(ngModel)]="model.username">
   </div>
 
   <div class="form-group">
