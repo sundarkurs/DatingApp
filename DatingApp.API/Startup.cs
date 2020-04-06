@@ -36,7 +36,11 @@ namespace DatingApp.API
         {
             services.AddDbContext<DataContext>(item => item.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
             services.AddControllers();
+
+            // Register repository services.
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
