@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatingApp.API.Models;
 
-namespace DatingApp.API.Data
+namespace DatingApp.API.Repositories
 {
     public interface IDatingRepository
     {
