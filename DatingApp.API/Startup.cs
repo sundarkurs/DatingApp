@@ -35,7 +35,15 @@ namespace DatingApp.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(item => item.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
-            services.AddControllers();
+            
+            // Controller 
+            // services.AddControllers(); 
+            // By default .net core 3.0 and above uses System.Text.Json for serialization
+            // As System.Text.Json is matured enough, we can change it to use Newtonsoft by adding nuget package and 
+            // Adding NewtonsoftJson for controllers like below.
+            services.AddControllers().AddNewtonsoftJson(opt => {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
             // Register repository services.
             services.AddScoped<IAuthRepository, AuthRepository>();
