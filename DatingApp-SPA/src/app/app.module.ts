@@ -15,6 +15,7 @@ import { ListsComponent } from './components/lists/lists.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { MemberListComponent } from './components/members/member-list/member-list.component';
 import { MemberCardComponent } from './components/members/member-card/member-card.component';
+import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
 
 import { AuthService } from './_services/auth.service';
 import { UserService } from './_services/user.service';
@@ -33,9 +34,10 @@ export function tokenGetter(){
       HomeComponent,
       RegisterComponent,
       MemberListComponent,
+      MemberDetailComponent,
+      MemberCardComponent,
       ListsComponent,
-      MessagesComponent,
-      MemberCardComponent
+      MessagesComponent
    ],
    imports: [
       BrowserModule,
@@ -46,7 +48,7 @@ export function tokenGetter(){
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {
-            tokenGetter: tokenGetter,
+            tokenGetter,
             whitelistedDomains: ['localhost:5020'],
             blacklistedRoutes: ['localhost:5020/api/auth']
          }

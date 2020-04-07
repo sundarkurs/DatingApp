@@ -4,18 +4,19 @@ import { MemberListComponent } from './components/members/member-list/member-lis
 import { MessagesComponent } from './components/messages/messages.component';
 import { ListsComponent } from './components/lists/lists.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
-    
-    { path: 'members', component: MemberListComponent, canActivate: [AuthGuard]}, // Single path guarding
+    { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]}, // Single path guarding
 
     { // Multiple path guarding using single Guard
-        path: '', 
-        runGuardsAndResolvers: 'always', 
+        path: '',
+        runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'messages', component: MessagesComponent},
+            { path: 'members', component: MemberListComponent},
+            { path: 'members/:id', component: MemberDetailComponent},
             { path: 'lists', component: ListsComponent},
         ]
     },
