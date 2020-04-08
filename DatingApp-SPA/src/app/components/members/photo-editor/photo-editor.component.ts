@@ -13,7 +13,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 })
 export class PhotoEditorComponent implements OnInit {
   @Input() photos: Photo[];
-  @Output() getMemberPhotoChange = new EventEmitter<string>();
+  @Output() getMemberPhotoChange = new EventEmitter<string>(); 
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
@@ -62,6 +62,7 @@ export class PhotoEditorComponent implements OnInit {
         };
 
         this.photos.push(photo);
+        this.alertify.success('Photo(s) uploaded successfully.');
       }
     };
   }
@@ -74,6 +75,8 @@ export class PhotoEditorComponent implements OnInit {
           this.currentMain = this.photos.filter(p => p.isMain === true)[0];
           this.currentMain.isMain = false;
           photo.isMain = true;
+          this.getMemberPhotoChange.emit(photo.url);
+          this.alertify.success('Your main photo has been changed.');
         },
         error => {
           this.alertify.error(error);
