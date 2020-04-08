@@ -40,6 +40,9 @@ namespace DatingApp.API
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
+            // Setting values from app settings to class properrties
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+
             //services.AddAutoMapper(typeof(Startup));
             services.AddAutoMapper(c => c.AddProfile<AutoMapperProfiles>(), typeof(Startup));
 
