@@ -24,6 +24,8 @@ import { ErrorInterceptorProvider } from './_common/error.interceptor';
 import { appRoutes } from './routes';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter(){
    return localStorage.getItem('token');
@@ -61,6 +63,8 @@ export function tokenGetter(){
    ],
    providers: [
       ErrorInterceptorProvider,
+      AuthGuard,
+      PreventUnsavedChanges,
       MemberDetailResolver,
       MemberEditResolver
    ],
