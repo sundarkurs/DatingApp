@@ -18,10 +18,12 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { MemberListComponent } from './components/members/member-list/member-list.component';
 import { MemberCardComponent } from './components/members/member-card/member-card.component';
 import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
+import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
 
 import { ErrorInterceptorProvider } from './_common/error.interceptor';
 import { appRoutes } from './routes';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 
 export function tokenGetter(){
    return localStorage.getItem('token');
@@ -36,6 +38,7 @@ export function tokenGetter(){
       MemberListComponent,
       MemberDetailComponent,
       MemberCardComponent,
+      MemberEditComponent,
       ListsComponent,
       MessagesComponent
    ],
@@ -58,7 +61,8 @@ export function tokenGetter(){
    ],
    providers: [
       ErrorInterceptorProvider,
-      MemberDetailResolver
+      MemberDetailResolver,
+      MemberEditResolver
    ],
    bootstrap: [
       AppComponent
