@@ -74,7 +74,7 @@ export class PhotoEditorComponent implements OnInit {
           this.currentMain.isMain = false;
           photo.isMain = true;
 
-          this.authService.changeMemberPhoto(photo.url);
+          this.authService.updateCurrentUserMainPhotoUrl(photo.url);
           this.authService.updateUserContext(photo.url);
 
           this.alertify.success('Your main photo has been changed.');
