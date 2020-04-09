@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using DatingApp.API.Helpers;
 using DatingApp.API.Models;
 using DatingApp.API.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -73,6 +75,10 @@ namespace DatingApp.API.Controllers
 
                     uploadResult = _cloudinary.Upload(uploadParams);
                 }
+            }
+
+            if(uploadResult.Error != null){
+                return StatusCode(StatusCodes.Status500InternalServerError, uploadResult.Error.Message);
             }
 
             photoForCreationDto.Url = uploadResult.Uri.ToString();

@@ -61,9 +61,18 @@ export class PhotoEditorComponent implements OnInit {
         };
 
         this.photos.push(photo);
+        if(res.isMain){
+          this.authService.updateCurrentUserMainPhotoUrl(photo.url);
+          this.authService.updateUserContext(photo.url);
+        }
         this.alertify.success('Photo(s) uploaded successfully.');
       }
     };
+
+    this.uploader.onErrorItem = (item, response, status, headers) => {
+      this.alertify.error('Unable to upload the photo.');
+    };
+
   }
 
   setMainPhoto(photo: Photo) {

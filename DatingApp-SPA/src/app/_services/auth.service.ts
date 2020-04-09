@@ -22,7 +22,9 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   updateCurrentUserMainPhotoUrl(photoUrl: string){
-    this.currentUserMainPhotoUrlSubject.next(photoUrl);
+    if (photoUrl){
+      this.currentUserMainPhotoUrlSubject.next(photoUrl);
+    }
   }
 
   login(model: any){
@@ -73,6 +75,7 @@ export class AuthService {
     localStorage.removeItem('user');
     this.decodedToken = null;
     this.currentUser = null;
+    this.updateCurrentUserMainPhotoUrl('../../assets/user.png');
   }
 
 }
