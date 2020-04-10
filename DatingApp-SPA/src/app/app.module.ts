@@ -9,6 +9,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 
@@ -63,6 +64,7 @@ export function tokenGetter(){
       RouterModule.forRoot(appRoutes),
       BsDatepickerModule.forRoot(),
       PaginationModule.forRoot(),
+      ButtonsModule,
       NgxGalleryModule,
       FileUploadModule,
       JwtModule.forRoot({
