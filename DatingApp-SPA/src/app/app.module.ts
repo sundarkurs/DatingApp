@@ -30,6 +30,7 @@ import { ErrorInterceptorProvider } from './_common/error.interceptor';
 import { appRoutes } from './routes';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { ListsResolver } from './_resolvers/lists.resolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
@@ -80,7 +81,8 @@ export function tokenGetter(){
       AuthGuard,
       PreventUnsavedChanges,
       MemberDetailResolver,
-      MemberEditResolver
+      MemberEditResolver,
+      ListsResolver
    ],
    bootstrap: [
       AppComponent

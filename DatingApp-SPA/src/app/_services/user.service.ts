@@ -19,7 +19,7 @@ export class UserService {
   getUsers(
     userParams?: UserParams,
     pageNumber?,
-    pageSize?,
+    pageSize?
   ): Observable<PaginatedResult<User[]>> {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<
       User[]
@@ -77,6 +77,48 @@ export class UserService {
 
   sendLike(userId: number, recipientId: number){
     return this.http.post(this.baseUrl + 'users/' + userId + '/like/' + recipientId, {});
+  }
+
+  getUserLikes(
+    userId: number,
+    likesParam?,
+    pageNumber?,
+    pageSize?,
+  ): Observable<PaginatedResult<User[]>> {
+    const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<
+      User[]
+    >();
+
+    let params = new HttpParams();
+
+    if (pageNumber != null && pageSize != null) {
+      params = params.append('pageNumber', pageNumber);
+      params = params.append('pageSize', pageSize);
+    }
+
+    if (likesParam === 'Likers') {
+      params = params.append('Likers', 'true');
+    }
+
+    if (likesParam === 'Likees') {
+      params = params.append('Likees', 'true');
+    }
+
+    console.log(params);
+
+    return this.http
+      .get<User[]>(this.baseUrl + 'users/' + userId + '/likes', { observe: 'response', params })
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(
+              response.headers.get('Pagination')
+            );
+          }
+          return paginatedResult;
+        })
+      );
   }
 
 }

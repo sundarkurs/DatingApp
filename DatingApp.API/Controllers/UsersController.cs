@@ -91,5 +91,19 @@ namespace DatingApp.API.Controllers
             return BadRequest("Failed to like user");
         }
 
+        [HttpGet("{id}/likes")]
+        public async Task<IActionResult> GetUserLikes(int id, [FromQuery]UserParams userParams)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            userParams.UserId = id;
+
+            var users = await _repo.GetUserLikes(userParams);
+            var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
+            Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+            return Ok(usersToReturn);
+        }
+
     }
 }
