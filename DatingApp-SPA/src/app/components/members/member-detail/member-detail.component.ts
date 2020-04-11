@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   NgxGalleryOptions,
@@ -8,6 +8,7 @@ import {
 
 import { User } from 'src/app/_models/user';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-member-detail',
@@ -18,6 +19,7 @@ export class MemberDetailComponent implements OnInit {
   user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  @ViewChild('memberTabs', {static: true}) memberTabs: TabsetComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +34,12 @@ export class MemberDetailComponent implements OnInit {
         this.alertify.error('Requested user does not exist.');
         this.router.navigate(['members']);
       }
+    });
+
+    // Selecting a tab on load based on the query string tab
+    this.route.queryParams.subscribe(params => {
+      const selectedTab = params.tab;
+      this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
     });
 
     this.galleryOptions = [
@@ -61,4 +69,9 @@ export class MemberDetailComponent implements OnInit {
     }
     return imageUrls;
   }
+
+  selectTab(tabId: number) {
+    this.memberTabs.tabs[tabId].active = true;
+  }
+
 }
