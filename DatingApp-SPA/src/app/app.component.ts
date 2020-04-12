@@ -10,7 +10,7 @@ import { AuthService } from './_services/auth.service';
 export class AppComponent implements OnInit {
 
   constructor(private authService: AuthService) {}
-  
+
   ngOnInit() {
     this.authService.setUserContext();
   }

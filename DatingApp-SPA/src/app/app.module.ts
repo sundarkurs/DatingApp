@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ListsComponent } from './components/lists/lists.component';
+import { LikesListComponent } from './components/likes-list/likes-list.component';
 import { MessagesComponent } from './components/messages/messages.component';
 
 import { MemberListComponent } from './components/members/member-list/member-list.component';
@@ -31,10 +31,11 @@ import { ErrorInterceptorProvider } from './_common/error.interceptor';
 import { appRoutes } from './routes';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
-import { ListsResolver } from './_resolvers/lists.resolver';
+import { LikesListResolver } from './_resolvers/likes-list.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+
 
 
 export function tokenGetter(){
@@ -53,18 +54,18 @@ export function tokenGetter(){
       MemberEditComponent,
       MemberMessagesComponent,
       PhotoEditorComponent,
-      ListsComponent,
+      LikesListComponent,
       MessagesComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
+      RouterModule.forRoot(appRoutes),
       FormsModule,
       ReactiveFormsModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
-      RouterModule.forRoot(appRoutes),
       BsDatepickerModule.forRoot(),
       PaginationModule.forRoot(),
       ButtonsModule,
@@ -84,7 +85,7 @@ export function tokenGetter(){
       PreventUnsavedChanges,
       MemberDetailResolver,
       MemberEditResolver,
-      ListsResolver,
+      LikesListResolver,
       MessagesResolver
    ],
    bootstrap: [

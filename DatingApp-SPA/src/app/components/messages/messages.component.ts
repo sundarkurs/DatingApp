@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from 'src/app/_models/message';
-import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { Pagination } from 'src/app/_models/pagination';
+import { PaginatedResult } from 'src/app/_models/paginatedResult';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
   selector: 'app-messages',
@@ -18,6 +20,7 @@ export class MessagesComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private messageService: MessageService,
     private authService: AuthService,
     private route: ActivatedRoute,
     private alertify: AlertifyService
@@ -31,7 +34,7 @@ export class MessagesComponent implements OnInit {
   }
 
   loadMessages() {
-    this.userService
+    this.messageService
       .getMessages(
         this.authService.decodedToken.nameid,
         this.pagination.currentPage,
@@ -53,7 +56,7 @@ export class MessagesComponent implements OnInit {
     this.alertify.confirm(
       'Are you sure you want to delete this message?',
       () => {
-        this.userService
+        this.messageService
           .deleteMessage(id, this.authService.decodedToken.nameid)
           .subscribe(
             () => {

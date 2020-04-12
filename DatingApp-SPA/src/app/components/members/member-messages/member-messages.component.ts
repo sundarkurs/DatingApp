@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Message } from 'src/app/_models/message';
-import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { MessageService } from 'src/app/_services/message.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { tap } from 'rxjs/operators';
 
@@ -16,9 +16,9 @@ export class MemberMessagesComponent implements OnInit {
   newMessage: any = {};
 
   constructor(
-    private userService: UserService,
     private authService: AuthService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class MemberMessagesComponent implements OnInit {
 
   loadMessages() {
     const currentUserId = +this.authService.decodedToken.nameid;
-    this.userService
+    this.messageService
       .getMessageThread(this.authService.decodedToken.nameid, this.recipientId)
       .pipe(
         tap((messages) => {
@@ -37,7 +37,7 @@ export class MemberMessagesComponent implements OnInit {
               messages[i].isRead === false &&
               messages[i].recipientId === currentUserId
             ) {
-              this.userService.markAsRead(currentUserId, messages[i].id);
+              this.messageService.markAsRead(currentUserId, messages[i].id);
             }
           }
         })
@@ -54,7 +54,7 @@ export class MemberMessagesComponent implements OnInit {
 
   sendMessage() {
     this.newMessage.recipientId = this.recipientId;
-    this.userService
+    this.messageService
       .sendMessage(this.authService.decodedToken.nameid, this.newMessage)
       .subscribe(
         (message: Message) => {

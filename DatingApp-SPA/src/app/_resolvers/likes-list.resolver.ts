@@ -9,7 +9,7 @@ import { AuthService } from '../_services/auth.service';
 import { Pagination } from '../_models/pagination';
 
 @Injectable()
-export class ListsResolver implements Resolve<User[]> {
+export class LikesListResolver implements Resolve<User[]> {
   pagination = new Pagination();
   likesParam = 'Likers';
 
