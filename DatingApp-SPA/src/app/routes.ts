@@ -11,9 +11,14 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { LikesListResolver } from './_resolvers/likes-list.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { RegisterComponent } from './components/register/register.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
+  {
+    path: 'signup',
+    component: RegisterComponent
+  },
   {
     path: 'messages',
     component: MessagesComponent,

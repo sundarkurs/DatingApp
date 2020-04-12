@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { TabsModule } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -35,6 +36,8 @@ import { LikesListResolver } from './_resolvers/likes-list.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 
@@ -47,6 +50,8 @@ export function tokenGetter(){
       AppComponent,
       NavComponent,
       HomeComponent,
+      CarouselComponent,
+      SignupComponent,
       RegisterComponent,
       MemberListComponent,
       MemberDetailComponent,
@@ -65,6 +70,7 @@ export function tokenGetter(){
       ReactiveFormsModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
+      CarouselModule.forRoot(),
       TabsModule.forRoot(),
       BsDatepickerModule.forRoot(),
       PaginationModule.forRoot(),

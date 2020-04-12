@@ -14,6 +14,11 @@
         >Messages</a
       >
     </li>
+    <li *ngIf="!loggedIn()" class="nav-item" routerLinkActive="active">
+      <a class="nav-link" [routerLink]="['/signup']" routerLinkActive="active"
+        >Signup</a
+      >
+    </li>
   </ul>
 
   <div *ngIf="loggedIn()" class="dropdown" dropdown>

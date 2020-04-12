@@ -64,10 +64,4 @@ export class RegisterComponent implements OnInit {
       });
     }
   }
-
-  cancel(){
-    console.log('Cancel from child.');
-    this.cancelRegister.emit(false);
-  }
-
 }
